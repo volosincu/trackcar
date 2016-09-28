@@ -62,39 +62,66 @@
 
     </style>
   </head>
+
+
+         <?php
+		$urlBase = "http://map.yellowfox.de/rti/get_pos.php";
+		$urlVBase = "http://map.yellowfox.de/rti/get_cars.php";
+		$vehId = "4BA39CF7BB574E7600DA96D7FD12CD5A";
+		$comId = "E02CC441D5DFB320DE6354B6C23F31B1";
+
+		function getData ($url){
+			
+			$ch = curl_init();  
+
+			curl_setopt($ch, CURLOPT_URL, $url);  
+			curl_setopt($ch, CURLOPT_HEADER, 0);  
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+			curl_setopt($ch, CURLOPT_HTTPHEADER,array('Content-Type: text/xml')); 
+
+			$output = curl_exec($ch);
+			curl_close($ch);  
+
+			return $output;
+		}
+
+		$url = "$urlBase?company=$comId&vehicle=$vehId&format=XML";  
+		$positionXML = getData($url);
+
+		$xml = simplexml_load_string($positionXML);
+		$json = json_encode($xml, JSON_PRETTY_PRINT);
+		$position = json_decode($json, true);
+
+		$lat = $position["message"]["lat"];
+		$lon = $position["message"]["lon"];
+
+
+		$urlVeh = "$urlVBase?company=$comId&vehicle=$vehId";  
+		$car = getData($urlVeh);
+
+		$myArray = explode(';', $car);
+		
+		//echo $car;
+		
+		function someFunction() {
+		    	echo "ooooo";
+		}
+
+		if ($_GET['do'] === "vehicle") {
+		    someFunction();
+		}
+	?>
+
+
+
   <body>
     <div class="main_page">
       <div class="page_header floating_element">
-       
+       	 <h3 style="display: inline-block;">Vehicle :</h3><span style="display: inline-block;"> <?php echo  substr($myArray[0], 1, -1);  ?> </span>
       </div>
 
       <div class="content_section floating_element">
 
-	<?php
-		$urlBase = "http://map.yellowfox.de/rti/get_pos.php";
-		$vehId = "4BA39CF7BB574E7600DA96D7FD12CD5A";
-		$comId = "E02CC441D5DFB320DE6354B6C23F31B1";
-
-		$url = "$urlBase?company=$comId&vehicle=$vehId&format=XML";  
-		$ch = curl_init();  
-
-		curl_setopt($ch, CURLOPT_URL, $url);  
-		curl_setopt($ch, CURLOPT_HEADER, 0);  
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-		curl_setopt($ch, CURLOPT_HTTPHEADER,array('Content-Type: text/xml')); 
-
-		$output = curl_exec($ch);
-		curl_close($ch);  
-		echo $output;
-		$xml = simplexml_load_string($output);
-		$json = json_encode($xml, JSON_PRETTY_PRINT);
-		$response = json_decode($json, true);
-	
-		$lat = $response["message"]["lat"];
-		$lon = $response["message"]["lon"];
-
-	?>
- 
       </div>
 
 	<input type="hidden" name="lat" id="lat" value="<?php echo $lat; ?>"/>
@@ -127,15 +154,17 @@
 			document.getElementsByTagName('head')[0].appendChild(script);
 	      	};
 
-		var pos = { lat : '50.3643022', lon : '8.695015', title : 'Destination: Daimlerstraße 61239 Ober-Mörlen' };
-		var veh = { lat : $("#lat").val(), lon : $("#lon").val(), title : "Vehicle position" };
+		
+		var pos = { lat : '50.3643022', lon : '8.695015', title : 'Destination: Daimlerstraße 61239 Ober-Mörlen'};
+		var veh = { lat : $("#lat").val(), lon : $("#lon").val(), title : "Vehicle position"};
 	       	var setPoint = function(r){
-			  var latLng = new google.maps.LatLng(r.lat, r.lon);
-			  var marker = new google.maps.Marker({
+
+			var latLng = new google.maps.LatLng(r.lat, r.lon);
+			var marker = new google.maps.Marker({
 			    position: latLng,
 			    map: map,
 			    title : r.title
-			  });
+			});
 		};
 
 
@@ -144,7 +173,14 @@
 			setPoint(pos);
 			setPoint(veh);
 	      	}
+		
+		$(document).ready(function(){
 
+			setInterval(function(){
+				window.location = "http://localhost";
+			}, 60000, true);
+
+		});
 
 	
 
