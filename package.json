@@ -1,0 +1,31 @@
+{
+  "name": "trackcar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "q": "^1.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volosincu/trackcar.git"
+  },
+  "keywords": [
+    "geolocation",
+    "nodejs"
+  ],
+  "author": "bogdan volosincu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/volosincu/trackcar/issues"
+  },
+  "homepage": "https://github.com/volosincu/trackcar#readme"
+}

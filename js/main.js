@@ -6,8 +6,11 @@ $(document).ready(function(){
 		window.location = "http://localhost";
 	}, 60000);
 
-	distance = parseInt(getDistanceFromLatLonInKm(coords.a.lat, coords.a.lon, coords.b.lat, coords.b.lon));
+        distance = parseInt(getDistanceFromLatLonInKm(coords.a.lat, coords.a.lon, coords.b.lat, coords.b.lon));
 
+        $('#km').html(distance);
+        console.log(distance);
+        
 	if (distance < 5){
 		$('#sign').addClass("closer");
 	}

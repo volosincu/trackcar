@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> Vehicle position </title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+  </head>
+
+
+  <body>
+    	<div class="main_page">
+	      <div class="page_header floating_element">
+		<div class="name">
+	       	 <h3 style="display: inline-block;">Vehicle :</h3><span style="display: inline-block;"><%= vehsign %> <%= name %> </span>
+		</div>	
+		<div class="dist"> 
+			<div class="sg" id="sign"></div> <span>dist: <span id="km"></span></span>
+		</div>
+	      </div>
+		<input type="hidden" name="lat" id="lat" value="<%= lat%>"/>
+		<input type="hidden" name="lon" id="lon" value="<%= lon%>"/>
+
+	      </div>
+	    </div>
+  	<div id="map"></div>
+
+	<script src="jquery.js"></script>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNUHy1uN_5F07POiMQBtGXcjSEeCixZb4&callback=initialize">
+	</script>
+
+	<script src="main.js"></script>
+	<script src="gmap.js"></script>
+  </body>
+</html>
