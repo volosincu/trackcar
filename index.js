@@ -25,6 +25,7 @@ var comId = "E02CC441D5DFB320DE6354B6C23F31B1";
 
 app.get('/', function (req, res) {    
     vehicle.requestVehData(vehId, comId).then(function(data){
+	console.log(data);
 	vehicle.requestVehName(vehId, comId).then(function(veh){
 	    data.name = veh[0].split("\"")[1];
 	    res.render('index', data);

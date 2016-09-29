@@ -38,7 +38,7 @@ module.exports = {
 	var deffer = q.defer();
 	
 	var url = 'http://map.yellowfox.de/rti/get_cars.php?company='
-	    + cid +'&vehicle='+ vid +'&format=JSON';
+	    + cid +'&vehicle='+ vid;
 	
 	var rst = http.get(url, function(httpres){
 	    var data = "";
