@@ -17,16 +17,12 @@
     position: relative;
     display: table;
 
-    width: 800px;
+    width: 100%;
 
     margin-bottom: 3px;
     margin-left: auto;
     margin-right: auto;
     padding: 0px 0px 0px 0px;
-
-    border-width: 2px;
-    border-color: #212738;
-    border-style: solid;
 
     background-color: #FFFFFF;
 
@@ -34,29 +30,39 @@
   }
 
   div.page_header {
-    height: 99px;
-    width: 100%;
-
-    background-color: #F5F6F7;
-  }
-
-  div.page_header span {
-    margin: 15px 0px 0px 50px;
-
-    font-size: 180%;
-    font-weight: bold;
+      height: 80px;
+      width: 100%;
+      background-color: #F5F6F7;
+      padding-top: 20px;
   }
 
   .sg {
-	position: relative;
-	top: -31px;
-	left: 27px;
-	height : 40px;
-	width : 40px;
-	border-radius: 22px;
+      height: 40px;
+      width: 40px;
+      border-radius: 22px;
+      display: inline-block;
+      margin-left: 27px;
   }
   .name {
-	padding-top: 17px;
+      padding-top: 17px;
+      float: left;
+      margin-left : 20px;
+  }
+  .dist {
+      position: relative;
+      display: inline-block;
+      float: left;
+      top: 7px;
+  }
+
+  .dist .dst {
+      font-size: 12px;
+      display: inline-block;
+      position: relative;
+      left: 13px;
+      top: -16px;
+      font-weight: bold;
+      
   }
 
   .page_header .close {

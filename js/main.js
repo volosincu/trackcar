@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	//refresh data after a minute 
 	setInterval(function(){
-		window.location = "http://localhost";
+		window.location = "http://localhost:3000";
 	}, 60000);
 
         distance = parseInt(getDistanceFromLatLonInKm(coords.a.lat, coords.a.lon, coords.b.lat, coords.b.lon));
