@@ -3,11 +3,9 @@
     padding: 0px 0px 0px 0px;
   }
 
-  body, html {
-    padding: 3px 3px 3px 3px;
-
-    background-color: #D8DBE2;
-
+body, html {
+    background-color: #F2F8FA;
+    paddingx: 3px 3px 3px 3px;
     font-family: Verdana, sans-serif;
     font-size: 11pt;
     text-align: center;
@@ -29,61 +27,68 @@
     text-align: center;
   }
 
-  div.page_header {
-      height: 80px;
-      width: 100%;
-      background-color: #F5F6F7;
-      padding-top: 20px;
-  }
-
-  .sg {
-      height: 40px;
-      width: 40px;
-      border-radius: 22px;
-      display: inline-block;
-      margin-left: 27px;
-  }
-  .name {
-      padding-top: 17px;
-      float: left;
-      margin-left : 20px;
-  }
-  .dist {
-      position: relative;
-      display: inline-block;
-      float: left;
-      top: 7px;
-  }
-
-  .dist .dst {
-      font-size: 12px;
-      display: inline-block;
-      position: relative;
-      left: 13px;
-      top: -16px;
-      font-weight: bold;
-      
-  }
-
-  .page_header .close {
-	background-color: yellow;
-	
-  }
-
-  .page_header .closer {
-	background-color: red;
-  }
-
-.page_header .far {
-	background-color: green;
-  }
-
-.page_header .farer {
-	background-color: blue;
-  }
-
    #map {
-        height: 500px;
+        height: 650px;
         width: 100%;
+	padding-top: 50px;
    }
 
+   .place {
+       padding-top : 30px;
+   }
+
+   ul.list-group {
+       padding-top : 30px;
+   }
+
+   ul li.list-group-item {
+       height : 43px;
+   }
+
+
+   ul li .vehsign {
+       text-align: left;
+       display: inline-block;
+   }
+
+   ul li .coll{
+       float: left;
+   }
+   
+   ul li .co{
+       font-size: 10px;
+       color: #787878;
+       text-align: left;
+       display: inline-block;
+       margin-top : 3px;
+       margin-left: 14px;
+   }
+
+
+   .list-group-item .close {
+       background-color: #C0BE0F;
+
+   }
+
+   .list-group-item .closer {
+       background-color: #D75248;
+   }
+
+   .list-group-item .far {
+       background-color: #37A234;
+   }
+
+   .list-group-item .farer {
+       background-color: blue;
+   }
+
+   .sg {
+       height: 20px;
+       width: 20px;
+       border-radius: 22px;
+       display: inline-block;
+       margin-left: 27px;
+       float: right;
+       position: relative;
+   }
+   

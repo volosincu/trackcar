@@ -1,13 +1,12 @@
- var map, distance ,coords = {
-	a : { lat : '50.3643022', lon : '8.695015', title : 'Destination: Daimlerstraße 61239 Ober-Mörlen' },
-	b : { lat : $("#lat").val(), lon : $("#lon").val(), title : "Vehicle position" }
-};
 
+var map, distance ,coords = {
+    o : { lat : $('#hlat').val(), lon : $('#hlon').val(), title : "Party Rent Frankfurt"}
+};
 
 function initialize() {
 	map = new google.maps.Map(document.getElementById('map'), {
-	  zoom: 9,
-	  center: new google.maps.LatLng($("#lat").val(),$("#lon").val()),
+	  zoom: 7,
+	  center: new google.maps.LatLng(coords.o.lat, coords.o.lon),
 	  mapTypeId: 'terrain'
 	});
 
@@ -16,19 +15,85 @@ function initialize() {
 	document.getElementsByTagName('head')[0].appendChild(script);
 };
 
-var setPoint = function(r){
+var setPoint = function(latLng, coord, info){
 
-	var latLng = new google.maps.LatLng(r.lat, r.lon);
-	var marker = new google.maps.Marker({
-	    position: latLng,
-	    map: map,
-	    title : r.title
-	});
+    if(info != null) {
+	$("#"+coord.title+"-duration").text(info.duration);
+	$("#"+coord.title+"-distance").text(info.distance);
+	setColor(info.distance, coord.title);
+    }
+    var marker = new google.maps.Marker({
+	position: latLng,
+	map: map,
+	title : coord.title
+    });
 };
 
-
-// load points of vehicle and location
 window.eqfeed_callback = function(results) {
-	setPoint(coords.a);
-	setPoint(coords.b);
+
+    Array.prototype.slice.apply($('.list-group-item')).forEach(function(el){
+	coords[el.id] = {
+	    title : el.id,
+	    vehsign : el.id,
+	    lat : $('#'+el.id+"-lat").val(),
+	    lon : $('#'+el.id+"-lon").val()
+	};
+    });
+    loadDistances(coords);
+}
+
+function loadDistances(coords) {
+
+    let dest = [], skip = true, titles = [];
+    for(let v in coords){
+	if(!skip){
+	    dest.push(new google.maps.LatLng(coords[v].lat, coords[v].lon));
+	    titles.push(coords[v]);
+	}
+	skip = false;
+    }
+
+    let origin = new google.maps.LatLng(coords.o.lat, coords.o.lon);
+
+    var service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix(
+	{
+	    origins: [ origin ],
+	    destinations: dest,
+	    travelMode: 'DRIVING'
+	},  function ( response, status) {
+	    if (status == 'OK') {
+
+		var origins = response.originAddresses;
+		var destinations = response.destinationAddresses;
+
+		setPoint(origin, coords.o);
+		for (var i = 0; i < origins.length; i++) {
+		    var results = response.rows[i].elements;
+		    for (var j = 0; j < results.length; j++) {
+			var element = results[j];
+			var info = {
+			    distance : element.distance.text,
+			    duration : element.duration.text
+			}
+			setPoint(dest[j], titles[j], info);
+		    }
+		}
+	    }
+	});
+
+}
+
+function setColor(distance, id) {
+
+    distance = parseFloat(distance);
+    if (distance < 10){
+	$("#"+id+"-sg").addClass("closer");
+    }
+    if (distance > 15){
+	$("#"+id+"-sg").addClass("far");
+    }
+    if (distance < 15 && distance > 10){
+	$("#"+id+"-sg").addClass("close");
+    }
 }
