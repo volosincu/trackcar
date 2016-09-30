@@ -25,54 +25,7 @@ module.exports = {
 
 	rst.end();
 	return deffer.promise;
-    },
-
-    requestVehName : function(vid, cid) {
-	var deffer = q.defer();
-
-	var url = 'http://map.yellowfox.de/rti/get_cars.php?company='
-	    + cid +'&vehicle='+ vid;
-
-	var rst = http.get(url, function(httpres){
-	    var data = "";
-	    httpres.on("data", function (chunk) {
-		data += chunk;
-	    });
-	    httpres.on("end", function () {
-		deffer.resolve(data.split(';'));
-	    });
-	});
-
-	rst.end();
-	return deffer.promise;
-    },
-
-
-
-
-    gPlaceId : function (lat, lon, name) {
-
-	var deffer = q.defer();
-
-
-
-	var rst = https.get(url, function(httpres){
-	    var data = "";
-	    httpres.on("data", function (chunk) {
-		data += chunk;
-	    });
-	    httpres.on("end", function () {
-		deffer.resolve(JSON.parse(data));
-	    });
-	});
-
-	rst.end();
-	return deffer.promise;
-
-
     }
-
-
 
 
 }
