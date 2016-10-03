@@ -17,6 +17,11 @@ app.use(express.static('css'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs')
 
+app.set('view options', {
+    open: '{{',
+    close: '}}'
+});
+
 
 var vehIds = ["4BA39CF7BB574E7600DA96D7FD12CD5A",
 	      "208C87FF45E93A4DFF68D9B096297CEA",
@@ -68,7 +73,8 @@ app.get('/', function (req, res) {
 			let data = {};
 			data.originlat = originlat;
 			data.originlon = originlon;
-			res.render('index', {data : data, vehs : vehs});
+
+			res.render('index', {data : data, vehs : vehs, uidata : {}});
 		    }
 		} else {
 		    var reason = result.reason;

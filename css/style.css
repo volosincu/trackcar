@@ -37,6 +37,10 @@ body, html {
        padding-top : 30px;
    }
 
+   .hidden {
+       display:none;
+   }
+
    ul.list-group {
        padding-top : 30px;
    }
@@ -54,7 +58,7 @@ body, html {
    ul li .coll{
        float: left;
    }
-   
+
    ul li .co{
        font-size: 10px;
        color: #787878;

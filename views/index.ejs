@@ -23,7 +23,7 @@
 	</div>
 	<div class="col-xs-6 col-md-4">
 
-	  <ul class="list-group">
+	  <ul id="veh-list" class="list-group">
 	    <% for(var i=0; i<vehs.length; i++) {%>
 	       <li class="list-group-item" id="<%= vehs[i].idv%>">
 		 <div class="coll vehsign" id="<%= vehs[i].idv%>-sign">
@@ -36,6 +36,10 @@
 		 <input type="hidden" name="lon" id="<%= vehs[i].idv%>-lon" value="<%= vehs[i].lon%>"/>
 	       </li>
 	    <% } %>
+	  </ul>
+
+	  <ul id="visible-data" class="list-group">
+
 	  </ul>
 
 	</div>
@@ -51,5 +55,9 @@
     </script>
     <script src="main.js"></script>
     <script src="gmap.js"></script>
+
+      </li>
+    </script>
+
   </body>
 </html>

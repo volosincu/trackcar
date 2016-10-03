@@ -42,6 +42,8 @@ window.eqfeed_callback = function(results) {
     loadDistances(coords);
 }
 
+//////// utils functions /////////
+
 function loadDistances(coords) {
 
     let dest = [], skip = true, titles = [];
@@ -62,6 +64,7 @@ function loadDistances(coords) {
 	    destinations: dest,
 	    travelMode: 'DRIVING'
 	},  function ( response, status) {
+
 	    if (status == 'OK') {
 
 		var origins = response.originAddresses;
@@ -79,11 +82,16 @@ function loadDistances(coords) {
 			setPoint(dest[j], titles[j], info);
 		    }
 		}
+		orderByDistance();
 	    }
 	});
 
 }
 
+
+/**
+ * @description set color depending on distance to origin
+ */
 function setColor(distance, id) {
 
     distance = parseFloat(distance);
@@ -97,3 +105,19 @@ function setColor(distance, id) {
 	$("#"+id+"-sg").addClass("close");
     }
 }
+
+/**
+ * @description detach elements from dom, sort by distance and reappend them
+ */
+function orderByDistance(){
+    var lis = Array.prototype.slice.apply($('.list-group-item').detach());
+
+    lis.sort(function(a, b){
+	const aa = parseFloat($(a).find("#"+a.id+"-distance").text().replace(/km/g, ""));
+	const bb = parseFloat($(b).find("#"+b.id+"-distance").text().replace(/km/g, ""));
+
+	if(aa== bb) return 0;
+	return aa> bb? 1: -1;
+    });
+    $('#veh-list').append(lis);
+};
