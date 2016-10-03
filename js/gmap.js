@@ -113,8 +113,24 @@ function orderByDistance(){
     var lis = Array.prototype.slice.apply($('.list-group-item').detach());
 
     lis.sort(function(a, b){
-	const aa = parseFloat($(a).find("#"+a.id+"-distance").text().replace(/km/g, ""));
-	const bb = parseFloat($(b).find("#"+b.id+"-distance").text().replace(/km/g, ""));
+
+	let aa, bb;
+	const da = $(a).find("#"+a.id+"-distance").text();
+	const db = $(b).find("#"+b.id+"-distance").text();
+
+	if(da.slice(-2) !== 'km'){
+	    let m = parseFloat(da.replace(/m/g, ""));
+	    aa = parseFloat(m/1000);
+	} else {
+	    aa = parseFloat(da.replace(/km/g, ""));
+	}
+
+	if(db.slice(-2) !== 'km'){
+	    let m = parseFloat(db.replace(/m/g, ""));
+	    bb = parseFloat(m/1000);
+	} else {
+	    bb = parseFloat(db.replace(/km/g, ""));
+	}
 
 	if(aa== bb) return 0;
 	return aa> bb? 1: -1;
